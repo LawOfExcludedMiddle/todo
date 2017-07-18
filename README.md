@@ -1,2 +1,1 @@
-**HOW TO COMPILE:**
-Run `sbcl --script "compile.cl"`.
+**HOW TO COMPILE:**</br>Run `sbcl --script "compile.cl"`.
