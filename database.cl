@@ -5,11 +5,6 @@
     (force-output *query-io*)
     (read-line *query-io*))
 
-(defun any-key ()
-    (format *query-io* "PRESS ANY KEY TO CONTINUE . . . ")
-    (force-output *query-io*)
-    (read *query-io*))
-
 (defun add-task (name desc)
     (push (list name desc) *task-list*)
     (save))
@@ -35,7 +30,7 @@
     (if (= (- 0 1) y) (parse-str x) (parse-int y)))
 
 (defun del-ambiguous ()
-    (remove-task (parse-integer (prompt "Enter task to delete: "))))
+    (remove-task (task (parse-integer (prompt "Enter task to delete: ")))))
 
 (defun parse-str (x)
     (handler-case (if (string-equal (subseq x 0 3) "del") (if (= 3 (length x)) (del-ambiguous) (remove-task (task (parse-integer (subseq x 3))))) (if (string-equal (subseq x 0 3) "add") (new-task) (if (string-equal (subseq x 0 4) "exit") (sb-ext:quit)))) (error (e) (learn-to-type))))
@@ -61,7 +56,7 @@
 
 (defun read-task (num) 
     (if (= 0 (length *task-list*)) (print-tasks) (format t "Task name: ~{~a~%Description: ~a~}~%" (task num)))
-    (any-key)
+    (prompt "PRESS ENTER TO CONTINUE . . . ")
     (cls)
     (print-tasks)) 
 
@@ -81,4 +76,5 @@
 (defun main ()
     (handler-case (reload) (error (e) ()))
     (cls)
-    (print-tasks))
+    (
+print-tasks))
